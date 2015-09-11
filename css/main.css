@@ -4,3 +4,7 @@
   height: 500px;
   width: 1000px;
 }
+
+#place-input {
+  width: 70%;
+}

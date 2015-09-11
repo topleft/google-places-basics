@@ -9,6 +9,8 @@ This tutorial assumes a begginer ability in setting up web pages using JavaScrip
 
 ## Here we go...
 
+### Part 1
+
 #### Create a basic front-end project structure
 Go [here](https://github.com/topleft/google-places-basics/tree/f87f0ae7f2ba34df9b72a6482835324a7390c7d1) for a copy of what I am using. You can clone it if you know how to use git, you can cut and paste the contents into your own project structure, or make your own files with this as a reference.
 
@@ -78,5 +80,48 @@ Add this to main.css
 ```
 
 Okay, lets open up index.html and see what we've got!
+
+You can grab the finished files for Part 1 [here]()
+
+### Part 2
+
+#### Markers and Infowindows
+
+>Quick Note: If you are following along with the linked github repository, you'll see I add some bootstrap styling to class this project up a bit. Bootstrap is a css library created by Twitter. It uses nested divs and classes heavily (among other techniques) to organize html into a grid system and apply styling.
+
+Markers are one of the things that make Google maps really functional and rich with information. For your map you may want to add markers to places that you've been in the world, or all the breweries you want to visit on you next road trip. A paleantologist could pinpoint exact locations of where T-Rex fossils have been found and then share that map with her colleagues. Markers are powerful and fun. Even better, adding them is easy too.
+
+Markers are objects provided by the Google Places API and they, much like maps, have properties we can set and customize. Markers 'belong' to a given map, so we need to specify this map, via a variable name, when we create a new marker. we also need to set the position of a marker. We can do this in many ways, for now we will use latitude and longitude.
+
+Add this code to main.js below the map instantiation(instantiation means creating a new 'instance' or object of a certain type).
+
+```
+var marker = new google.maps.Marker({
+    position: {lat:38.153661, lng:-107.758774},
+    map: map
+  });
+```
+
+What is that marker pointing to? Wouldn't it be nice to have some more information about this location? Google has an object for that...info window...
+
+```
+  var infowindow = new google.maps.InfoWindow({
+    content: "<div><h2>Colorado Boy</h2><p>Brew Pub in Ridgeway, CO</p></div>"
+  });
+```
+We've created our info window, and now we need a way to access it. Add a click event handler to the marker like this:
+
+```
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+```
+
+Have a look at the two peices of code above and try to figure out why the info window opens on our marker. Info windows dont belong to markers like markers belong to maps. Info windows are there own object. The way we bind them to a marker is by passing that a marker's variable name in when we call `.open()` on the info window.
+
+You can grab the finished files for Part 2 [here]()
+
+
 
 
