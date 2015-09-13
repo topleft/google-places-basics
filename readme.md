@@ -175,19 +175,19 @@ autocomplete.bindTo('bounds', map);
 ```
 
 We are doing a lot here in just 3 lines. I'll break it down per line:
-1. Grabbing the input field with some vanilla javascript (vanilla just means plain ol' javascript) and storing it in the variable `placeInput`
-1. Creating a new instance of the Google AutoComplete object, binding it to our input by passing it in as an argument, and storing that object in the variable `autocomplete`
-1. Binding out autocomplete object to the bounds of our map. This will make the auto complete suggestions smarter by taking into account the current map bounds or view
+1. Grabbing the input field with some vanilla javascript (vanilla just means plain ol' javascript) and storing it in the variable `placeInput`.
+1. Creating a new instance of the Google AutoComplete object, binding it to our input by passing it in as an argument, and storing that object in the variable `autocomplete`.
+1. Binding our autocomplete object to the bounds of our map. This will make the auto complete suggestions smarter by taking into account the current map bounds or view.
 
-If you fire up the page in your browser you should be able to type into the input and see a list of suggerstions populate! Sweet right!?!
+If you fire up the page in your browser you should be able to type into the input and see a list of suggestions populate! Sweet right!?!
 
 #### Finding Places
 
-We have a functioning search field, lets make it do something.
+We have a functioning search field, lets hook it up with the map and find some places.
 
-Establish a variable call `place`. We do this in the scope od the `document.on('ready')` so that we can have access to it inside all of the function within this scope. (for more on scope, check this out...coming soon)
+Establish a variable called `place`. We do this in the scope of the `document.on('ready')` so that we can have access to it inside all of the function within this scope. For more on scope, check [this](http://toddmotto.com/everything-you-wanted-to-know-about-javascript-scope/) out.
 
-Then add an event listener to `autocomplete`. The `place_changed` event is specific to Google Auto Complete objects, and registers when the item in the suggestions list is selected. The code looks like this:
+Then add an event listener to `autocomplete`. The `'place_changed'` event is specific to Google Auto-Complete objects, and registers when the item in the suggestions list is selected. The code looks like this:
 
 ```
   var place;
@@ -197,8 +197,10 @@ Then add an event listener to `autocomplete`. The `place_changed` event is speci
   });
 ```
 
-Take at look at what is going on inside the event listener function. Google has provided really nice syntax for all of our objects and methods(methods are the same thing as functions more or less) and you can read its meaning pretty easily. In this code we set the `place` variable to a Place object that is returned by the Auto Complete. This is our first taste of a Google 'Place' object. They are packed with information on location, address, business type, Google rating, phone number, realtime information like isOpen (yeah...now! so cool). Check out all the details a google Place gives you access to [here](https://developers.google.com/maps/documentation/javascript/places#place_details).
+Take at look at what is going on inside the event listener function. Google has provided really nice syntax for all of our objects and methods(methods are vary similar to functions) and you can read its meaning pretty easily. In this code we set the `place` variable to a Place object that is returned by the Auto-Complete. This is our first taste of a Google 'Place' object. They are packed with information on location, address, business type, Google rating, phone number, realtime information like isOpen (yeah...now! so cool). Check out all the details a google Place gives you access to [here](https://developers.google.com/maps/documentation/javascript/places#place_details).
 
+
+#### Move the Map on Click
 
 Lets move the map to the given place when our user clicks the 'Find' button.
 
@@ -206,19 +208,19 @@ Lets move the map to the given place when our user clicks the 'Find' button.
   $(document).on("click",'#add-location', function(e){
       e.preventDefault();
 
-      // if place has no gemetry, it is not what we expected (or need)
+      // if place has no geometry, it is not what we expected (or need)
       // so we break out with a return statement
       if (! place.geometry) {
         return;
       }
 
-      // if our place has a viewport property within gometry
-      // property we use that to set our map view
+      // if place has a viewport property within gometry property
+      // we use that to set our map view
       else if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport);
       }
 
-      // if no viewort property we use location to set our map view
+      // if no viewort property, we use location to set our map view
       // and specify a zoom of 17
       else {
         map.setCenter(place.geometry.location);
@@ -227,11 +229,11 @@ Lets move the map to the given place when our user clicks the 'Find' button.
   });
 ```
 
-Check out the comments to see whats going on, but I also want to talk about the `.viewport` property. Some Place objects have a `.viewport` property within `.geometry`. This is a predefined view of this location that will shift and zoom the map apropriately for this specific location. If you are looking up he [Pacific Ocean](https://www.google.com/maps/place/Pacific+Ocean/@-13.7036473,-148.9712961,3z/data=!3m1!4b1!4m2!3m1!1s0x76ed042c30f318eb:0x8eff14a070876cbc) then the map is zoomed way out as to sea the whole ocean. If you checkout [Brussels, Belgium](https://www.google.com/maps/place/Brussels,+Belgium/@50.8387,4.363405,12z/data=!3m1!4b1!4m2!3m1!1s0x47c3c486740f9fff:0x10099ab2f4c8030) we get a much more zoomed in map.
+Check out the comments to see whats going on, but I also want to talk about the `.viewport` property. Some Place objects have a `.viewport` property within `.geometry`. This is a predefined view of this location that will shift and zoom the map apropriately for this specific location. If you are looking up the [Pacific Ocean](https://www.google.com/maps/place/Pacific+Ocean/@-13.7036473,-148.9712961,3z/data=!3m1!4b1!4m2!3m1!1s0x76ed042c30f318eb:0x8eff14a070876cbc) then the map is zoomed way out as to see the whole ocean. If you checkout [Brussels, Belgium](https://www.google.com/maps/place/Brussels,+Belgium/@50.8387,4.363405,12z/data=!3m1!4b1!4m2!3m1!1s0x47c3c486740f9fff:0x10099ab2f4c8030) we get a much more zoomed in map.
 
+#### Moving Marker and Info Window
 
-
-We need to move our `marker` and `window` instantiations (remember, that means instances of a certain object type) to inside this click event so that they are bound to our Place object.
+We need to move our `Marker` and `Info Window` instantiations (remember, that means instances of a certain object type) to inside this click event so that they are bound to our Place object.
 
 Take this code  and put it underneath the if/else statement, but remeber to keep it inside the `on.("click")` event.
 
@@ -249,9 +251,9 @@ Take this code  and put it underneath the if/else statement, but remeber to keep
       infowindow.open(map, marker);
     });
 ```
-### Wrap Up
 
-And voila! Here is your very own custom Google Map. These are the bare essntials of getting a map with a search feature on the page with access to the powerful Google Places Library. From here you could add an array (or a database) where your places are stored, create a listing in a side bar to show more details, or maybe personalize the look of you map with styles and custom icons.
+### Wrap Up
+And voila! Here is your very own custom Google Map. These are the bare essntials of getting a map with a search feature on the page, as well as access to the powerful Google Places Library. From here you could add an array (or a database) where your places are stored, create a listing in a side bar to show more details, or maybe personalize the look of your map with styles and custom icons.
 
 You can grab the finished files for Part 3 [here](https://github.com/topleft/google-places-basics/tree/v4).
 
