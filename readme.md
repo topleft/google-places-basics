@@ -5,14 +5,14 @@ Who doesn't love a good map!?! So let's make our own with the bare essentials of
 
 The Google Places API is used by all Google maps to get detailed information on millions of locations around the world. This info can be used to plan your next holiday, find all your favorite coffee shops or maybe research a new business plan. By the end of this tutorial you will be able to get a map into your HTML page and put a marker on the map with an info window via an auto-complete search field.
 
-This tutorial assumes a begginer ability in setting up web pages using JavaScript, jQuery, CSS and HTML.
+This tutorial assumes a beginner ability in setting up web pages using JavaScript, jQuery, CSS and HTML.
 
 ## Here we go...
 
 ### Part 1
 
 #### Create a basic front-end project structure
-Go [here](https://github.com/topleft/google-places-basics/tree/f87f0ae7f2ba34df9b72a6482835324a7390c7d1) for a copy of what I am using. You can clone it if you know how to use git, you can cut and paste the contents into your own project structure, or make your own files with this as a reference.
+Go [here](https://github.com/topleft/google-places-basics/tree/f87f0ae7f2ba34df9b72a6482835324a7390c7d1) for a copy of the structure I am using. You can clone it if you know how to use git, if not, you can cut and paste the contents into your own project structure, or make your own files with this as a reference.
 
 ##### Project Structure
 ```
@@ -27,7 +27,7 @@ Root Directory
 
 
 #### Accessing the API
-Google has made it super simple to get started with their maps and services. Add this script tag to your index.html file right below the jQuery script tag.
+Google has made it super simple to get started with their maps and services. Add this script tag to your *index.html* file right below the jQuery script tag. If your not quite sure where to put it, have a look at the project files [here](https://github.com/topleft/google-places-basics/tree/v2).
 
 ```
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
@@ -39,7 +39,7 @@ When our program runs it will ask Google for information via a specific set of s
 
 
 #### Create a Map
-Now lets create a map. Add this line of code to main.js file inside of the "document.on('ready')".
+Now lets create a map. Add this line of code to *main.js* file inside of the `document.on('ready')`.
 
 ```
   var map = new google.maps.Map(document.getElementById('map-div'),{
@@ -52,25 +52,28 @@ We have:
 * set the variable `map` to a new map object created by using the Google syntax
 * given it a place to be in the index.html by grabbing the ID selector `map-div`
 * set the center property of the map to coordinates in Colorado
-* set the zoom property of the map
+* set the 'zoom' property of the map
 
 There are a lot more properties that you can add to a google map. Check out the
-[docs](https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapOptions)
+[Map Object docs](https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapOptions)
 for more options to cutomize maps for your purposes.
 
 
 #### Make Some Space
-We need to give this map a place to be in our index.html. We specified an ID of `map-div` when we created our map object, so we need to put that into an html tag...probably a div :)
+We need to give this map a place to be in our *index.html*. We specified an ID of `map-div` when we created our map object, so we need to put that into an html tag...probably a div :)
 
-Add this code into index.html inside the body element.
+Add this code into *index.html* inside the body element.
 
 ```
 <div id="map"></div>
 ```
 
-Finally, we need to create some space for our map to occupy. At this point, if you pull up index.html, nothing will show on the page. This is because the map will not create a space for itself, it will only take up an area provided for it. How should we "create" space or our map?...CSS will do the trick.
+Finally, we need to create some space for our map to occupy. At this point, if you open up *index.html* in your browser by specifying the local path (mine looks like this: `file:///Users/petej/Documents/blog-posts/google-maps-basics-tutorial/index.html`) into the URL field, nothing will show on the page. This is because the map will not create a space for itself, it will only take up an area provided for it. How should we "create" space for our map?...CSS will do the trick.
 
-Add this to main.css
+>*Tip*: Another good way of opening the *index.html* file is by going into the terminal or iTerm, navigating to the directory that this project is in(specifically where the html file is located) and typing `open index.html`, then hit enter. That should do it. For more great material on the command line checkout [Learn The Hard Way](http://cli.learncodethehardway.org/book/).
+
+
+Add this to *main.css*:
 
 ```
 #map-div {
@@ -79,7 +82,7 @@ Add this to main.css
 }
 ```
 
-Okay, lets open up index.html and see what we've got!
+Okay, lets open up *index.html* and see what we've got! Try to do it via the terminal, also referred to as the command line :) also referred to as bash...and iTerm...and the shell...okay thats enough.
 
 You can grab the finished files for Part 1 [here](https://github.com/topleft/google-places-basics/tree/v2).
 
@@ -94,9 +97,9 @@ You can grab the finished files for Part 1 [here](https://github.com/topleft/goo
 
 Markers are one of the things that make Google maps really functional and rich with information. For your map you may want to add markers to places that you've been in the world, or all the breweries you want to visit on you next road trip. A paleantologist could pinpoint exact locations of where T-Rex fossils have been found and then share that map with her colleagues. Markers are powerful and fun. Even better, adding them is easy too.
 
-Markers are objects provided by the Google Places API and they, much like maps, have properties we can set and customize. Markers 'belong' to a given map, so we need to specify this map, via a variable name, when we create a new marker. we also need to set the position of a marker. We can do this in many ways, for now we will use latitude and longitude.
+Markers are objects provided by the Google Places API and they, much like maps, have properties we can set and customize. Markers 'belong' to a given map, so we need to specify this map, via an argument, when we create a new marker. we also need to set the position of the marker. We can do this in many ways, for now we will use latitude and longitude.
 
-Add this code to main.js below the map instantiation(instantiation means creating a new 'instance' or object of a certain type).
+Add this code to main.js below the map instantiation (instantiation means creating a new 'instance' or object of a certain type).
 
 ```
 var marker = new google.maps.Marker({
@@ -107,7 +110,7 @@ var marker = new google.maps.Marker({
 
 #### Info Windows
 
-What is that marker pointing to? Wouldn't it be nice to have some more information about this location? Google has an object for that...info window...
+What is that marker pointing to? Wouldn't it be nice to have some more information about this location? Google has an object for that...`InfoWindow` :)
 
 ```
   var infowindow = new google.maps.InfoWindow({
@@ -123,7 +126,7 @@ We've created our info window, and now we need a way to access it. Add a click e
 
 ```
 
-Have a look at the two peices of code above and try to figure out why the info window opens on our marker. Info windows dont belong to markers like markers belong to maps. Info windows are there own object. The way we bind them to a marker is by passing that a marker's variable name in when we call `.open()` on the info window.
+Have a look at the two peices of code above and try to figure out why the info window opens on our marker. Info windows don't belong to markers like markers belong to maps. Info windows are there own object. The way we bind them to a marker is by passing that a marker's variable name in when we call `.open()` on the info window.
 
 You can grab the finished files for Part 2 [here](https://github.com/topleft/google-places-basics/tree/v3).
 
@@ -159,7 +162,7 @@ Start be adding a search form to index.html.
 
 Again, there is some bootstrap magic in there, but all you really need is a `form` with an `input` and a `button`. Be sure to add the proper id's to the input and the button. These id's can be called whatever you choose, they will be used in our main.js file to grab on to values and listen for user events.
 
-#### Auto Complete
+#### Auto-Complete
 
 Open you main.js file and add this code:
 
@@ -246,10 +249,14 @@ Take this code  and put it underneath the if/else statement, but remeber to keep
       infowindow.open(map, marker);
     });
 ```
+### Wrap Up
 
-And voila! Here is your very own custom Google Map. These are the bare essntials of getting a map with a search feature on the page with access to the powerful Google Places Library. From here you could add an array (or a database) where your places are stored, create a listing in a side bar to show more details, oror maybe personalize the look of you map with styles and custom icons.
+And voila! Here is your very own custom Google Map. These are the bare essntials of getting a map with a search feature on the page with access to the powerful Google Places Library. From here you could add an array (or a database) where your places are stored, create a listing in a side bar to show more details, or maybe personalize the look of you map with styles and custom icons.
 
-If you go further with Google Places, be sure to look into the [`Place.place_id`](https://developers.google.com/places/place-id) which is a super handy way of grabbing locations and calling up there details. Google has given this place_id to millions of locations around the world and have allowed their users to keep them updated with current information.
+You can grab the finished files for Part 3 [here](https://github.com/topleft/google-places-basics/tree/v4).
+
+
+If you go further with Google Places, be sure to look into the [`Place.place_id`](https://developers.google.com/places/place-id) which is a super handy way of grabbing locations and calling up there details. Google has assiged a place_id to millions of locations around the world and have allowed their users to keep them updated with current information.
 
 
 
