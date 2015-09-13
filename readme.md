@@ -95,7 +95,7 @@ You can grab the finished files for Part 1 [here](https://github.com/topleft/goo
 ### Part 2 - Markers and Info Windows
 
 
-> Quick Note: If you are following along with the linked Github repository, you'll see I added some bootstrap styling to class this project up a bit. Bootstrap is a HTML, CSS, and JavaScript library that provides numerous helper styles for creating the basis of you web site/application.
+> Quick Note: If you are following along with the linked Github repository, you'll see I added some Bootstrap styling to class this project up a bit. [Bootstrap](http://getbootstrap.com/) is a HTML, CSS, and JavaScript library that provides numerous helper styles for creating the basis of you web site/application.
 
 #### Markers
 
@@ -147,13 +147,13 @@ ADD IMAGE
 
 #### Search Field with Auto Complete
 
-Hard Coding locations is ok, but we want our map to be dynamic. Like I was saying, Google provides tons of functionality with the Places API. We are going to take advantage of the auto complete feature for our search input.
+Hard Coding locations is ok, but we want our map to be dynamic. Like said, Google provides tons of functionality with the Places API. We are going to take advantage of the auto complete feature for our search input.
 
 #### Search Form
 
 Start be adding a search form to index.html.
 
-```
+```html
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <form class="form-inline">
@@ -171,13 +171,13 @@ Start be adding a search form to index.html.
     </div>
 ```
 
-Again, there is some bootstrap magic in there, but all you really need is a `form` with an `input` and a `button`. Be sure to add the proper id's to the input and the button. These id's can be called whatever you choose, they will be used in our main.js file to grab on to values and listen for user events.
+Again, there is some Bootstrap magic in there, but all you really need is a `form` with an `input` and a `button`. Be sure to add the proper `id`'s to the input and the button. These `id`'s can be called whatever you choose; they will be used in our *main.js* file to grab on to values and listen for user events.
 
 #### Auto-Complete
 
-Open you main.js file and add this code:
+Open the *main.js* file and add this code:
 
-```
+```javascript
 var placeInput = document.getElementById('place-input');
 
 var autocomplete = new google.maps.places.Autocomplete(placeInput);
@@ -186,21 +186,24 @@ autocomplete.bindTo('bounds', map);
 ```
 
 We are doing a lot here in just 3 lines. I'll break it down per line:
+
 1. Grabbing the input field with some vanilla javascript (vanilla just means plain ol' javascript) and storing it in the variable `placeInput`.
 1. Creating a new instance of the Google AutoComplete object, binding it to our input by passing it in as an argument, and storing that object in the variable `autocomplete`.
 1. Binding our autocomplete object to the bounds of our map. This will make the auto complete suggestions smarter by taking into account the current map bounds or view.
 
-If you fire up the page in your browser you should be able to type into the input and see a list of suggestions populate! Sweet right!?!
+If you fire up the page in your browser you should be able to type into the input and see a list of suggestions populate! Sweet, right!?!
+
+ADD IMAGE
 
 #### Finding Places
 
-We have a functioning search field, lets hook it up with the map and find some places.
+We have a functioning search field. Now lets hook it up with the map and find some places.
 
-Establish a variable called `place`. We do this in the scope of the `document.on('ready')` so that we can have access to it inside all of the function within this scope. For more on scope, check [this](http://toddmotto.com/everything-you-wanted-to-know-about-javascript-scope/) out.
+Establish a variable called `place` in the scope of the `document.on('ready')` so that we can have access to it inside all of the function within this scope. For more on scope, check [this](http://toddmotto.com/everything-you-wanted-to-know-about-javascript-scope/) out.
 
 Then add an event listener to `autocomplete`. The `'place_changed'` event is specific to Google Auto-Complete objects, and registers when the item in the suggestions list is selected. The code looks like this:
 
-```
+```javascript
   var place;
 
   autocomplete.addListener('place_changed', function() {
@@ -208,14 +211,14 @@ Then add an event listener to `autocomplete`. The `'place_changed'` event is spe
   });
 ```
 
-Take at look at what is going on inside the event listener function. Google has provided really nice syntax for all of our objects and methods(methods are vary similar to functions) and you can read its meaning pretty easily. In this code we set the `place` variable to a Place object that is returned by the Auto-Complete. This is our first taste of a Google 'Place' object. They are packed with information on location, address, business type, Google rating, phone number, realtime information like isOpen (yeah...now! so cool). Check out all the details a google Place gives you access to [here](https://developers.google.com/maps/documentation/javascript/places#place_details).
+Take at look at what is going on inside the event listener function. Google has provided really nice syntax for all of our objects and methods, and you can read its meaning pretty easily. In this code we set the `place` variable to a Place object that is returned by the Auto-Complete. This is our first taste of a Google 'Place' object. They are packed with information on location, address, business type, Google rating, phone number, real-time information like isOpen (yeah...now! so cool). Check out all the details a google Place gives you access to [here](https://developers.google.com/maps/documentation/javascript/places#place_details).
 
 
 #### Move the Map on Click
 
-Lets move the map to the given place when our user clicks the 'Find' button.
+Lets move the map to the given place when our user clicks the 'Find' button:
 
-```
+```javascript
   $(document).on("click",'#add-location', function(e){
       e.preventDefault();
 
@@ -240,15 +243,25 @@ Lets move the map to the given place when our user clicks the 'Find' button.
   });
 ```
 
-Check out the comments to see whats going on, but I also want to talk about the `.viewport` property. Some Place objects have a `.viewport` property within `.geometry`. This is a predefined view of this location that will shift and zoom the map apropriately for this specific location. If you are looking up the [Pacific Ocean](https://www.google.com/maps/place/Pacific+Ocean/@-13.7036473,-148.9712961,3z/data=!3m1!4b1!4m2!3m1!1s0x76ed042c30f318eb:0x8eff14a070876cbc) then the map is zoomed way out as to see the whole ocean. If you checkout [Brussels, Belgium](https://www.google.com/maps/place/Brussels,+Belgium/@50.8387,4.363405,12z/data=!3m1!4b1!4m2!3m1!1s0x47c3c486740f9fff:0x10099ab2f4c8030) we get a much more zoomed in map.
+Check out the comments to see what's going on.
+
+Let's look closer at the `.viewport` property. Some Place objects have a `.viewport` property within `.geometry`. This is a predefined view of this location that will shift and zoom the map apropriately for this specific location. For example, if look up the [Pacific Ocean](https://www.google.com/maps/place/Pacific+Ocean/@-13.7036473,-148.9712961,3z/data=!3m1!4b1!4m2!3m1!1s0x76ed042c30f318eb:0x8eff14a070876cbc) then the map is zoomed way out as to see the whole ocean.
+
+ADD IMAGE
+
+If you check out [Brussels, Belgium](https://www.google.com/maps/place/Brussels,+Belgium/@50.8387,4.363405,12z/data=!3m1!4b1!4m2!3m1!1s0x47c3c486740f9fff:0x10099ab2f4c8030) we get a much more zoomed in map.
+
+ADD IMAGE
+
+Test this out with more locations.
 
 #### Moving Marker and Info Window
 
 We need to move our `Marker` and `Info Window` instantiations (remember, that means instances of a certain object type) to inside this click event so that they are bound to our Place object.
 
-Take this code  and put it underneath the if/else statement, but remeber to keep it inside the `on.("click")` event.
+Take this code and place it underneath the if/else statement, but remember to keep it inside the `on.("click")` event.
 
-```
+```javascript
  var marker = new google.maps.Marker({
       position: place.geometry.location,
       map: map
@@ -264,17 +277,11 @@ Take this code  and put it underneath the if/else statement, but remeber to keep
 ```
 
 ### Wrap Up
-And voila! Here is your very own custom Google Map. These are the bare essntials of getting a map with a search feature on the page, as well as access to the powerful Google Places Library. From here you could add an array (or a database) where your places are stored, create a listing in a side bar to show more details, or maybe personalize the look of your map with styles and custom icons.
+
+And voila! Here is your very own custom Google Map.
+
+These are the bare essntials of getting a map with a search feature on the page, as well as access to the powerful Google Places Library. From here you could add an array (or a database) where your places are stored, create a listing in a side bar to show more details, or maybe personalize the look of your map with styles and custom icons.
 
 You can grab the finished files for Part 3 [here](https://github.com/topleft/google-places-basics/tree/v4).
 
-
-If you go further with Google Places, be sure to look into the [`Place.place_id`](https://developers.google.com/places/place-id) which is a super handy way of grabbing locations and calling up there details. Google has assiged a place_id to millions of locations around the world and have allowed their users to keep them updated with current information.
-
-
-
-
-
-
-
-
+If you go further with Google Places, be sure to look into the [`Place.place_id`](https://developers.google.com/places/place-id), which is a super handy way of grabbing locations and calling up the location's details. Google has assiged a `place_id` to millions of locations around the world and have allowed their users to keep them updated with current information.
