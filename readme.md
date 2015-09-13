@@ -99,7 +99,7 @@ You can grab the finished files for Part 1 [here](https://github.com/topleft/goo
 
 #### Markers
 
-Markers make Google maps functional and rich with information. For example, for your map, you may want to add markers to places that you've been in the world or all the breweries you want to visit on you next road trip. A paleantologist could pinpoint exact locations of where T-Rex fossils have been found and then share that map with his/her colleagues. Markers are powerful and fun - and adding them to your map is easy!
+Markers make Google maps functional and rich with information. For example, for your map, you may want to add markers to places that you've been in the world or all the breweries you want to visit on you next road trip. A paleantologist could pinpoint exact locations of where T-Rex fossils have been found and then share that map with her colleagues. Markers are powerful and fun - and adding them to your map is easy!
 
 Markers are objects provided by the Google Places API and they, much like maps, have properties we can set and customize. Markers "belong" to a given map, so we need to specify the map, via an argument, when we create a new marker. we also need to set the position of the marker. We can do this in many ways, for now we will use latitude and longitude.
 
@@ -135,7 +135,7 @@ We've created our info window, and now we need a way to access it. Add a click e
 
 ```
 
-Have a look at the two peices of code above and try to figure out why the info window opens on our marker. Info windows don't belong to markers like markers belong to maps. Instead, Info windows are there own object. The way we bind them to a marker is by passing that a marker's variable name in when we call `.open()` on the info window.
+Have a look at the two peices of code above and try to figure out why the info window opens on our marker. Info windows don't belong to markers like markers belong to maps. Instead, Info windows are there own object. The way we bind them to a marker is by passing that marker's variable name in when we call `.open()` on the info window.
 
 You can grab the finished files for Part 2 [here](https://github.com/topleft/google-places-basics/tree/v3).
 
