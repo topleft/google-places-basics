@@ -10,7 +10,7 @@ The [Google Places API](https://developers.google.com/places/) is used by all Go
 
 Here we go...
 
-### Part 1
+### Part 1 - Setup
 
 #### Create the Project Structure
 
@@ -34,9 +34,9 @@ Google has made it super simple to get started with their maps and services. Add
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 ```
 
-This script tag calls the Google Places JavaScript API, giving us access to the Google Maps objects and methods available via key words in our JavaScript.
+This script tag calls the Google Places JavaScript API, giving us access to the Google map objects and methods available via key words in our JavaScript.
 
-When our program runs it will ask Google for information via a specific set of syntax or code that we will write into our *main.js* file. The details of this syntax has been made available to us in [this](https://developers.google.com/maps/documentation/javascript/tutorial) documentation. As a coder, you will learn to love excellent docs like these; they detail all the keys needed for unlocking Google Maps.
+When our program runs it will ask Google for information via a specific set of syntax or code that we will write into our *main.js* file. The details of this syntax has been made available to us in [this](https://developers.google.com/maps/documentation/javascript/tutorial) documentation. As a coder, you will learn to love excellent docs like these; they detail all the keys needed for unlocking Google maps.
 
 #### Create a Map
 
@@ -55,7 +55,7 @@ We-
 * set the center property of the map to coordinates in Colorado, and
 * set the 'zoom' property of the map.
 
-This is just the basics. There are a lot more properties that you can add to a Google Map. Check out the
+This is just the basics. There are a lot more properties that you can add to a Google map. Check out the
 [Map Object docs](https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapOptions)
 for more options to cutomize maps for your purposes.
 
@@ -95,48 +95,55 @@ You can grab the finished files for Part 1 [here](https://github.com/topleft/goo
 ### Part 2 - Markers and Info Windows
 
 
->Quick Note: If you are following along with the linked github repository, you'll see I added some bootstrap styling to class this project up a bit. Bootstrap is a css library created by Twitter. It uses nested divs and classes heavily (among other techniques) to organize html into a grid system and apply styling.
+> Quick Note: If you are following along with the linked Github repository, you'll see I added some bootstrap styling to class this project up a bit. Bootstrap is a HTML, CSS, and JavaScript library that provides numerous helper styles for creating the basis of you web site/application.
 
 #### Markers
 
-Markers are one of the things that make Google maps really functional and rich with information. For your map you may want to add markers to places that you've been in the world, or all the breweries you want to visit on you next road trip. A paleantologist could pinpoint exact locations of where T-Rex fossils have been found and then share that map with her colleagues. Markers are powerful and fun. Even better, adding them is easy too.
+Markers make Google maps functional and rich with information. For example, for your map, you may want to add markers to places that you've been in the world or all the breweries you want to visit on you next road trip. A paleantologist could pinpoint exact locations of where T-Rex fossils have been found and then share that map with his/her colleagues. Markers are powerful and fun - and adding them to your map is easy!
 
-Markers are objects provided by the Google Places API and they, much like maps, have properties we can set and customize. Markers 'belong' to a given map, so we need to specify this map, via an argument, when we create a new marker. we also need to set the position of the marker. We can do this in many ways, for now we will use latitude and longitude.
+Markers are objects provided by the Google Places API and they, much like maps, have properties we can set and customize. Markers "belong" to a given map, so we need to specify the map, via an argument, when we create a new marker. we also need to set the position of the marker. We can do this in many ways, for now we will use latitude and longitude.
 
-Add this code to main.js below the map instantiation (instantiation means creating a new 'instance' or object of a certain type).
+Add this code to *main.js*, just below the map instantiation (creating a new 'instance' or object of a certain type):
 
-```
+```javascript
 var marker = new google.maps.Marker({
     position: {lat:38.153661, lng:-107.758774},
     map: map
   });
 ```
 
+Test this out in your browser. What do you see?
+
+ADD IMAGE
+
 #### Info Windows
 
-What is that marker pointing to? Wouldn't it be nice to have some more information about this location? Google has an object for that...`InfoWindow` :)
+What is that marker pointing to? Wouldn't it be nice to have some more information about this location? Google has an object for that - `InfoWindow`. :)
 
-```
+```javascript
   var infowindow = new google.maps.InfoWindow({
     content: "<div><h2>Colorado Boy</h2><p>Brew Pub in Ridgeway, CO</p></div>"
   });
 ```
-We've created our info window, and now we need a way to access it. Add a click event handler to the marker like this:
 
-```
+We've created our info window, and now we need a way to access it. Add a click event handler to the marker:
+
+```javascript
   marker.addListener('click', function() {
     infowindow.open(map, marker);
   });
 
 ```
 
-Have a look at the two peices of code above and try to figure out why the info window opens on our marker. Info windows don't belong to markers like markers belong to maps. Info windows are there own object. The way we bind them to a marker is by passing that a marker's variable name in when we call `.open()` on the info window.
+Have a look at the two peices of code above and try to figure out why the info window opens on our marker. Info windows don't belong to markers like markers belong to maps. Instead, Info windows are there own object. The way we bind them to a marker is by passing that a marker's variable name in when we call `.open()` on the info window.
 
 You can grab the finished files for Part 2 [here](https://github.com/topleft/google-places-basics/tree/v3).
 
+ADD IMAGE
+
 ---
 
-### Part 3
+### Part 3 - Auto Complete
 
 #### Search Field with Auto Complete
 
