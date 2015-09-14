@@ -2,7 +2,7 @@
 
 **Who doesn't love a good map!?! So let's make our own with the bare essentials of the Google Places API.**
 
-ADD IMAGE
+![Final Map](./img/Finished-Product.png)
 
 The [Google Places API](https://developers.google.com/places/) is used by all Google maps to get detailed information on millions of locations around the world. This info can be used to plan your next holiday, find all your favorite coffee shops or maybe research a new business plan. By the end of this tutorial you will be able to add a map to your HTML document and place [markers](https://developers.google.com/maps/documentation/javascript/markers) on the map with an [info window](https://developers.google.com/maps/documentation/javascript/infowindows) via an [auto-complete search field](https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete).
 
@@ -86,7 +86,8 @@ Add this to *main.css*:
 
 Okay, lets open up *index.html* and see what we've got! Try to do it via the terminal (also referred to as the command line... bash... iTerm... shell...).
 
-ADD IMAGE
+![Final Map](./img/Part-1.png)
+
 
 You can grab the finished files for Part 1 [here](https://github.com/topleft/google-places-basics/tree/v2).
 
@@ -114,7 +115,8 @@ var marker = new google.maps.Marker({
 
 Test this out in your browser. What do you see?
 
-ADD IMAGE
+![Final Map](./img/Part-2.png)
+
 
 #### Info Windows
 
@@ -139,7 +141,8 @@ Have a look at the two peices of code above and try to figure out why the info w
 
 You can grab the finished files for Part 2 [here](https://github.com/topleft/google-places-basics/tree/v3).
 
-ADD IMAGE
+![Final Map](./img/Part-2.png)
+
 
 ---
 
@@ -191,6 +194,9 @@ We are doing a lot here in just 3 lines. I'll break it down per line:
 1. Binding our autocomplete object to the bounds of our map. This will make the auto complete suggestions smarter by taking into account the current map bounds or view.
 
 If you fire up the page in your browser you should be able to type into the input and see a list of suggestions populate! Sweet right!?!
+
+![]()
+
 
 #### Finding Places
 
