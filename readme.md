@@ -115,7 +115,7 @@ var marker = new google.maps.Marker({
 
 Test this out in your browser. What do you see?
 
-![Final Map](./img/Part-2.png)
+
 
 
 #### Info Windows
@@ -141,7 +141,7 @@ Have a look at the two peices of code above and try to figure out why the info w
 
 You can grab the finished files for Part 2 [here](https://github.com/topleft/google-places-basics/tree/v3).
 
-![Final Map](./img/Part-2.png)
+![Marker with InfoWindow](./img/Marker-Window.png)
 
 
 ---
@@ -195,7 +195,7 @@ We are doing a lot here in just 3 lines. I'll break it down per line:
 
 If you fire up the page in your browser you should be able to type into the input and see a list of suggestions populate! Sweet right!?!
 
-![]()
+![Auto-Complete](./img/Map-with-Auto-Complete.png)
 
 
 #### Finding Places
