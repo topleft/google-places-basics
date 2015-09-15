@@ -257,7 +257,7 @@ Let's look closer at the `.viewport` property. Some Place objects have a `.viewp
 
 If you check out [Brussels, Belgium](https://www.google.com/maps/place/Brussels,+Belgium/@50.8387,4.363405,12z/data=!3m1!4b1!4m2!3m1!1s0x47c3c486740f9fff:0x10099ab2f4c8030) we get a much more zoomed in map.
 
-![Brussles, Belgium](./img/Brussels-Search.png)
+![Brussels, Belgium](./img/Brussels-Search.png)
 
 Test this out with more locations.
 
