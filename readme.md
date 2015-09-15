@@ -253,11 +253,11 @@ Check out the comments to see what's going on.
 
 Let's look closer at the `.viewport` property. Some Place objects have a `.viewport` property within `.geometry`. This is a predefined view of this location that will shift and zoom the map apropriately for this specific location. For example, if look up the [Pacific Ocean](https://www.google.com/maps/place/Pacific+Ocean/@-13.7036473,-148.9712961,3z/data=!3m1!4b1!4m2!3m1!1s0x76ed042c30f318eb:0x8eff14a070876cbc) then the map is zoomed way out as to see the whole ocean.
 
-[Pacific Ocean](./img/Pacific-Search.png)
+![Pacific Ocean](./img/Pacific-Search.png)
 
 If you check out [Brussels, Belgium](https://www.google.com/maps/place/Brussels,+Belgium/@50.8387,4.363405,12z/data=!3m1!4b1!4m2!3m1!1s0x47c3c486740f9fff:0x10099ab2f4c8030) we get a much more zoomed in map.
 
-[Brussles, Belgium](./img/Brussels-Search.png)
+![Brussles, Belgium](./img/Brussels-Search.png)
 
 Test this out with more locations.
 
