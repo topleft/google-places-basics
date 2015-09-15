@@ -150,11 +150,11 @@ You can grab the finished files for Part 2 [here](https://github.com/topleft/goo
 
 #### Search Field with Auto Complete
 
-Hard Coding locations is ok, but we want our map to be dynamic. Like said, Google provides tons of functionality with the Places API. We are going to take advantage of the auto complete feature for our search input.
+Hard Coding locations is ok, but we want our map to be dynamic. Like I said, Google provides tons of functionality with the Places API. We are going to take advantage of the auto complete feature for our search input.
 
 #### Search Form
 
-Start be adding a search form to index.html.
+Start by adding a search form to index.html.
 
 ```html
     <div class="row">
@@ -195,8 +195,6 @@ We are doing a lot here in just 3 lines. I'll break it down per line:
 1. Binding our autocomplete object to the bounds of our map. This will make the auto complete suggestions smarter by taking into account the current map bounds or view.
 
 If you fire up the page in your browser you should be able to type into the input and see a list of suggestions populate! Sweet, right!?!
-
-ADD IMAGE
 
 ![Auto-Complete](./img/Map-with-Auto-Complete.png)
 
@@ -291,3 +289,5 @@ These are the bare essntials of getting a map with a search feature on the page,
 You can grab the finished files for Part 3 [here](https://github.com/topleft/google-places-basics/tree/v4).
 
 If you go further with Google Places, be sure to look into the [`Place.place_id`](https://developers.google.com/places/place-id), which is a super handy way of grabbing locations and calling up the location's details. Google has assiged a `place_id` to millions of locations around the world and have allowed their users to keep them updated with current information.
+
+Thanks for reading!
