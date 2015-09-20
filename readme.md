@@ -49,11 +49,12 @@ Now lets create a map. Add the following line of code to *main.js* file inside t
   });
 ```
 
-We-
-* set the variable `map` to a new map object created by using the Google syntax,
-* gave the map a place to live on the *index.html* file by grabbing the ID selector `map-div`,
-* set the center property of the map to coordinates in Colorado, and
-* set the 'zoom' property of the map.
+This:
+
+  * sets the variable `map` to a new Google Map object,
+  * gives the map a place to live on the `index.html` file by grabbing the ID selector `map-div`,
+  * sets the `center` property of the map to coordinates within Colorado, and
+  * sets the `zoom` property to level 7.
 
 This is just the basics. There are a lot more properties that you can add to a Google map. Check out the
 [Map Object docs](https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapOptions)
